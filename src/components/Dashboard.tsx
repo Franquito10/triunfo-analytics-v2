@@ -115,8 +115,8 @@ const tabs = [
             <div className="flex items-center justify-between">
               <div>
                 <h1 className="text-4xl font-bold mb-2">Triunfo Analytics Pro</h1>
-                <p className="text-purple-100 text-lg">Análisis Integral - Octubre 2024</p>
-                <p className="text-purple-200 text-sm mt-1">Periodo: 01/10/2024 - 01/11/2024 (31 días)</p>
+                <p className="text-purple-100 text-lg">Análisis Integral - Octubre 2025</p>
+<p className="text-purple-200 text-sm mt-1">Periodo: 01/10/2025 - 31/10/2025 (31 días)</p>
               </div>
               <div className="text-right">
                 <div className="bg-white bg-opacity-20 rounded-xl px-6 py-3 backdrop-blur-sm">
