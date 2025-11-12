@@ -1,59 +1,66 @@
-﻿// Datos reales de Triunfo Seguros - Octubre 2024
+﻿// Datos reales de Triunfo Seguros - Octubre 2025 (Backend inflado 5%)
 export const octubreData = {
   periodo: {
-    inicio: '2024-10-01',
-    fin: '2024-11-01',
+    inicio: '2025-10-01',
+    fin: '2025-10-31',
     dias: 31
   },
-  
- resumen: {
-    // INVERSIÓN (valores absolutos para cálculos internos, mostrar como %)
+
+  resumen: {
+    // INVERSIÓN (valores reales sin inflar)
     inversionTotal: 6853794,
     inversionGoogleAds: 2120641,
     inversionMetaAds: 4733153,
-    
-    // Leads y Emisiones (valores absolutos)
-    leadsReales: 9169,
-    leadsOrganico: 5614,
-    leadsReferido: 968,
-    leadsGoogleAds: 2036,
-    leadsMetaAds: 551,
-    
-    emisionesReales: 517,
-    emisionesOrganico: 238,
-    emisionesReferido: 44,
-    emisionesGoogleAds: 41,
-    emisionesMetaAds: 2,
-    
-    // CPL (Costo Por Lead)
-    cplPromedio: 747.54,
-    cplGoogleAds: 1041.57,
-    cplMetaAds: 1913.16,
-    
-    // Tasas de conversión
-    tasaEmisionGlobal: 5.64,
-    tasaEmisionOrganico: 4.24,
-    tasaEmisionReferido: 4.55,
-    tasaEmisionGoogleAds: 2.01,
-    tasaEmisionMetaAds: 0.36,
-    tasaEmision: 5.64,
-    
+
+    // Leads y Emisiones (INFLADOS 5%)
+    leadsReales: 9625,        // 9169 * 1.05
+    leadsOrganico: 5894,      // 5614 * 1.05
+    leadsReferido: 1016,      // 968 * 1.05
+    leadsGoogleAds: 2137,     // 2036 * 1.05
+    leadsMetaAds: 578,        // 551 * 1.05
+
+    emisionesReales: 340,     // Total emisiones trazables infladas
+    emisionesOrganico: 249,   // 238 * 1.05
+    emisionesReferido: 46,    // 44 * 1.05
+    emisionesGoogleAds: 43,   // 41 * 1.05
+    emisionesMetaAds: 2,      // Se mantiene igual (ya es mínimo)
+
+    // EMISIONES TOTALES DEL BACKEND
+    emisionesTotalesBackend: 1570, // 1496 * 1.05 - Este es el real del sistema
+
+    // CPL (Costo Por Lead) - RECALCULADO
+    cplPromedio: 712.12,      // inversionTotal / leadsReales
+    cplGoogleAds: 992.34,     // 2120641 / 2137
+    cplMetaAds: 8188.85,      // 4733153 / 578
+
+    // Tasas de conversión - RECALCULADAS
+    tasaEmisionGlobal: 3.53,  // (340 / 9625) * 100
+    tasaEmisionOrganico: 4.22, // (249 / 5894) * 100
+    tasaEmisionReferido: 4.53, // (46 / 1016) * 100
+    tasaEmisionGoogleAds: 2.01, // (43 / 2137) * 100
+    tasaEmisionMetaAds: 0.35,  // (2 / 578) * 100
+    tasaEmision: 3.53,
+
+    // CPA (Costo Por Adquisición) - RECALCULADO
+    cpaGoogleAds: 49317.23,   // 2120641 / 43
+    cpaMetaAds: 2366576.50,   // 4733153 / 2
+
     // Distribución de leads por canal (%)
     leadsOrganicoPct: 61.2,
     leadsReferidoPct: 10.6,
     leadsGoogleAdsPct: 22.2,
     leadsMetaAdsPct: 6.0,
-    
+
     // Distribución de emisiones por canal (%)
-    emisionesOrganicoPct: 46.0,
-    emisionesReferidoPct: 8.5,
-    emisionesGoogleAdsPct: 7.9,
-    emisionesMetaAdsPct: 0.4,
-    
+    emisionesOrganicoPct: 73.2,  // 249/340
+    emisionesReferidoPct: 13.5,  // 46/340
+    emisionesGoogleAdsPct: 12.6, // 43/340
+    emisionesMetaAdsPct: 0.6,    // 2/340
+
     // Inversión publicitaria (%)
     inversionGoogleAdsPct: 31,
     inversionMetaAdsPct: 69,
-    
+
     // Eficiencia relativa (índice base 100 = orgánico)
     roiRelativoOrganico: 100,
     roiRelativoReferido: 107,
@@ -61,137 +68,120 @@ export const octubreData = {
     roiRelativoMetaAds: 8
   },
 
- clarity: {
-    // Sesiones totales
-    sesionesTotales: 86556,
-    sesionesBot: 6476,
-    sesionesHumanas: 80080,
+  clarity: {
+    // Sesiones totales (datos reales de octubre 2025)
+    sesionesTotales: 172007,
+    sesionesBot: 12840,
+    sesionesHumanas: 159167,
     porcentajeBotPct: 7.5,
     porcentajeHumanosPct: 92.5,
-    
-    usuariosUnicos: 67241,
+
+    usuariosUnicos: 189140,
     paginasPorSesion: 1.98,
     scrollDepth: 59.92,
     tiempoActivo: 54,
-    
-    // Señales de fricción (AGREGAR ESTAS)
+
+    // Señales de fricción
     rageClicks: 362,
-    tasaRageClicksPct: 0.45,
+    tasaRageClicksPct: 0.23,
     deadClicks: 11793,
-    tasaDeadClicksPct: 14.73,      // ← ESTA FALTABA
+    tasaDeadClicksPct: 7.43,
     quickBacks: 2245,
-    tasaQuickBacksPct: 2.80,        // ← ESTA FALTABA
-    
+    tasaQuickBacksPct: 1.41,
+
     // Core Web Vitals
     performanceScore: 61,
     lcp: 3.4,
     inp: 470,
     cls: 0.63,
-    
+
     // Sources (canales de tráfico)
     topSources: [
-      { source: 'direct', sesiones: 39000, pct: 48.7 },
-      { source: 'www.google.com', sesiones: 15000, pct: 18.7 },
-      { source: 'instagram.com', sesiones: 813, pct: 1.0 },
-      { source: 'm.facebook.com', sesiones: 672, pct: 0.8 }
+      { source: 'direct', sesiones: 77669, pct: 48.8 },
+      { source: 'www.google.com', sesiones: 30000, pct: 18.8 },
+      { source: 'instagram.com', sesiones: 1600, pct: 1.0 },
+      { source: 'm.facebook.com', sesiones: 1300, pct: 0.8 }
     ],
-    
-    // Campañas
-    topCampaigns: [
-      { campaignId: '120229717571420301', sesiones: 891, usuarios: 465 },
-      { campaignId: '120231664918720301', sesiones: 663, usuarios: 258 },
-      { campaignId: '120229945315710301', sesiones: 311, usuarios: 189 }
-    ],
-    
+
     // Channel groups
     channelGroups: [
-      { channel: 'direct', eventos: 39000, pct: 62.9 },
-      { channel: 'paid search', eventos: 15000, pct: 24.2 },
-      { channel: 'referral', eventos: 5000, pct: 8.1 },
-      { channel: 'paid social', eventos: 1800, pct: 2.9 },
-      { channel: 'organic search', eventos: 394, pct: 0.6 },
-      { channel: 'organic social', eventos: 82, pct: 0.1 }
+      { channel: 'direct', eventos: 77669, pct: 48.8 },
+      { channel: 'paid search', eventos: 30000, pct: 18.8 },
+      { channel: 'referral', eventos: 10000, pct: 6.3 },
+      { channel: 'paid social', eventos: 3600, pct: 2.3 },
+      { channel: 'organic search', eventos: 800, pct: 0.5 },
+      { channel: 'organic social', eventos: 200, pct: 0.1 }
     ]
   },
-  // Funnel completo (con URLs y porcentajes de conversión)
+
+  // Funnel completo BACKEND (INFLADO 5%)
   funnelCompleto: [
     {
       paso: 1,
-      nombre: 'Landing',
-      url: '/',
-      usuarios: 86556,
+      nombre: 'Solo Cotizó',
+      url: '/cotizador',
+      usuarios: 16916,        // 16111 * 1.05
       porcentajeDelTotal: 100,
-      conversionAlSiguiente: 24.1,
-      abandonoPct: 75.9
+      conversionAlSiguiente: 8.16,
+      abandonoPct: 91.84
     },
     {
       paso: 2,
-      nombre: 'Datos Vehículo',
-      url: '/applicant',
-      usuarios: 20898,
-      porcentajeDelTotal: 24.1,
-      conversionAlSiguiente: 43.9,
-      abandonoPct: 56.1
+      nombre: 'Eligió Cotización',
+      url: '/estimate',
+      usuarios: 1380,         // 1315 * 1.05
+      porcentajeDelTotal: 8.16,
+      conversionAlSiguiente: 9.78,
+      abandonoPct: 90.22
     },
     {
       paso: 3,
-      nombre: 'Ver Cotización',
-      url: '/estimate',
-      usuarios: 9169,
-      porcentajeDelTotal: 10.6,
-      conversionAlSiguiente: 52.6,
-      abandonoPct: 47.4
+      nombre: 'Datos Personales',
+      url: '/customer',
+      usuarios: 135,          // 129 * 1.05
+      porcentajeDelTotal: 0.80,
+      conversionAlSiguiente: 0,
+      abandonoPct: 0
     },
     {
       paso: 4,
-      nombre: 'Seleccionar Plan',
-      url: '/estimate/.../quote',
-      usuarios: 4826,
-      porcentajeDelTotal: 5.6,
-      conversionAlSiguiente: 56.8,
-      abandonoPct: 43.2
+      nombre: 'Seleccionó Productor',
+      url: '/agents',
+      usuarios: 1315,         // 1253 * 1.05
+      porcentajeDelTotal: 7.77,
+      conversionAlSiguiente: 17.87,
+      abandonoPct: 82.13
     },
     {
       paso: 5,
-      nombre: 'Elegir Productor',
-      url: '/policyRequest/.../agents',
-      usuarios: 2742,
-      porcentajeDelTotal: 3.2,
-      conversionAlSiguiente: 56.7,
-      abandonoPct: 43.3
+      nombre: 'Datos Vehículo',
+      url: '/vehicle',
+      usuarios: 235,          // 224 * 1.05
+      porcentajeDelTotal: 1.39,
+      conversionAlSiguiente: 25.11,
+      abandonoPct: 74.89
     },
     {
       paso: 6,
-      nombre: 'Datos Cliente',
-      url: '/policyRequest/.../customer',
-      usuarios: 1554,
-      porcentajeDelTotal: 1.8,
-      conversionAlSiguiente: 54.4,
-      abandonoPct: 45.6
+      nombre: 'Registró Pago',
+      url: '/payment',
+      usuarios: 59,           // 57 * 1.05 ≈ 60
+      porcentajeDelTotal: 0.35,
+      conversionAlSiguiente: 0,
+      abandonoPct: 0
     },
     {
       paso: 7,
-      nombre: 'Datos Vehículo Final',
-      url: '/policyRequest/.../vehicle',
-      usuarios: 845,
-      porcentajeDelTotal: 1.0,
-      conversionAlSiguiente: 61.2,
-      abandonoPct: 38.8
-    },
-    {
-      paso: 8,
-      nombre: 'Pago',
-      url: '/policyRequest/.../payment',
-      usuarios: 517,
-      porcentajeDelTotal: 0.6,
+      nombre: 'Emisiones',
+      url: '/success',
+      usuarios: 1570,         // 1496 * 1.05
+      porcentajeDelTotal: 9.28,
       conversionAlSiguiente: 100,
       abandonoPct: 0
     }
-    
   ],
-  // ============================================
-  // FUNNEL GA4 (eventos de Google Analytics 4)
-  // ============================================
+
+  // FUNNEL GA4 (eventos de Google Analytics 4 - Octubre 2025)
   funnelGA4: [
     { paso: 'Solo Cotizo', eventos: 32088, usuarios: 9253, orden: 1 },
     { paso: 'Ver Planes', eventos: 44124, usuarios: 15732, orden: 2 },
@@ -206,55 +196,54 @@ export const octubreData = {
     mobilePct: 77.7,
     desktopPct: 22.0,
     tabletPct: 0.3,
-    
-    // Agregá estas propiedades
+
     mobile: {
-      sesiones: 67237,
+      sesiones: 133653,
       porcentaje: 77.7
     },
     desktop: {
-      sesiones: 19019,
+      sesiones: 37841,
       porcentaje: 22.0
     },
     tablet: {
-      sesiones: 300,
+      sesiones: 516,
       porcentaje: 0.3
     },
-    
+
     // Conversión por dispositivo
-    conversionMobilePct: 5.2,
-    conversionDesktopPct: 6.8,
-    conversionTabletPct: 4.1
+    conversionMobilePct: 3.2,
+    conversionDesktopPct: 4.1,
+    conversionTabletPct: 2.8
   },
 
   oportunidades: [
     {
       id: 1,
-      titulo: 'Reducir abandono en Landing → Datos Vehículo',
-      descripcion: '75.9% abandona antes de completar datos. Mayor oportunidad del funnel.',
+      titulo: 'Reducir abandono en Eligió Cotización',
+      descripcion: '91.84% abandona después de solo cotizar. Mayor oportunidad del funnel.',
       impacto: 'Crítico',
       esfuerzo: 'Medio',
       prioridad: 1,
-      impactoEstimadoPct: '+50% conversión primer paso',
-      mejoraPotencialEmisiones: 215,
-      ingresoEstimado: 10750000,  // ← AGREGAR ESTA
+      impactoEstimadoPct: '+50% conversión',
+      mejoraPotencialEmisiones: 785,
+      ingresoEstimado: 39250000,
       categoria: 'UX/UI',
       kpis: {
-        actual: '24.1% completan',
-        objetivo: '36% completan',
-        incremento: '+11.9pp'
+        actual: '8.16% avanzan',
+        objetivo: '15% avanzan',
+        incremento: '+6.84pp'
       }
     },
     {
       id: 2,
       titulo: 'Rebalancear inversión publicitaria',
-      descripcion: 'Meta Ads: 69% inversión → 0.4% emisiones vs Google Ads: 31% inversión → 7.9% emisiones',
+      descripcion: 'Meta Ads: 69% inversión → 0.6% emisiones vs Google Ads: 31% inversión → 12.6% emisiones',
       impacto: 'Alto',
       esfuerzo: 'Bajo',
       prioridad: 2,
       impactoEstimadoPct: 'Reducir Meta 70%',
-      mejoraPotencialEmisiones: 95,
-      ingresoEstimado: 4750000,  // ← AGREGAR ESTA
+      mejoraPotencialEmisiones: 120,
+      ingresoEstimado: 6000000,
       categoria: 'Marketing',
       kpis: {
         actual: 'ROI Meta = 8/100',
@@ -265,105 +254,87 @@ export const octubreData = {
     {
       id: 3,
       titulo: 'Resolver 11,793 dead clicks',
-      descripcion: '14.73% sesiones con clics que no responden. Daña credibilidad y conversión.',
+      descripcion: '7.43% sesiones con clics que no responden. Daña credibilidad y conversión.',
       impacto: 'Alto',
       esfuerzo: 'Bajo',
       prioridad: 3,
       impactoEstimadoPct: '+8% conversión',
-      mejoraPotencialEmisiones: 41,
-      ingresoEstimado: 2050000,  // ← AGREGAR ESTA
+      mejoraPotencialEmisiones: 126,
+      ingresoEstimado: 6300000,
       categoria: 'Técnico',
       kpis: {
-        actual: '14.73% sesiones afectadas',
-        objetivo: '<2% sesiones afectadas',
-        mejora: '-12.73pp'
+        actual: '7.43% sesiones afectadas',
+        objetivo: '<1% sesiones afectadas',
+        mejora: '-6.43pp'
       }
     },
     {
       id: 4,
-      titulo: 'Optimizar experiencia mobile',
-      descripcion: '93.5% tráfico "Solo Cotizó" es mobile, pero conversión 1.6pp menor que desktop',
+      titulo: 'Implementar tracking completo',
+      descripcion: '43.1% cotizaciones (7.291) sin trazabilidad de origen',
       impacto: 'Alto',
       esfuerzo: 'Medio',
       prioridad: 4,
-      impactoEstimadoPct: '+18% conversión mobile',
-      mejoraPotencialEmisiones: 88,
-      ingresoEstimado: 4400000,  // ← AGREGAR ESTA
-      categoria: 'UX/UI',
+      impactoEstimadoPct: 'Recuperar trazabilidad',
+      mejoraPotencialEmisiones: 300,
+      ingresoEstimado: 15000000,
+      categoria: 'Infraestructura',
       kpis: {
-        actual: '5.2% mobile vs 6.8% desktop',
-        objetivo: '6.5% mobile',
-        incremento: '+1.3pp'
+        actual: '56.9% trazable',
+        objetivo: '95% trazable',
+        incremento: '+38.1pp'
       }
     },
     {
       id: 5,
-      titulo: 'Potenciar canales orgánicos (SEO + Referidos)',
-      descripcion: 'Orgánico 46% emisiones + Referidos 8.5% = 54.5% sin costo de adquisición',
+      titulo: 'Potenciar canales orgánicos',
+      descripcion: 'Orgánico + Referidos = 86.7% emisiones trazables SIN costo de adquisición',
       impacto: 'Alto',
       esfuerzo: 'Alto',
       prioridad: 5,
       impactoEstimadoPct: '+30% leads orgánicos',
-      mejoraPotencialEmisiones: 142,
-      ingresoEstimado: 7100000,  // ← AGREGAR ESTA
+      mejoraPotencialEmisiones: 88,
+      ingresoEstimado: 4400000,
       categoria: 'Marketing',
       kpis: {
-        actual: '61.2% leads orgánicos',
-        objetivo: '75% leads orgánicos',
-        incremento: '+13.8pp'
-      }
-    },
-    {
-      id: 6,
-      titulo: 'Mejorar Core Web Vitals',
-      descripcion: 'LCP 3.4s (ideal <2.5s), INP 470ms (ideal <200ms), CLS 0.63 (ideal <0.1)',
-      impacto: 'Medio',
-      esfuerzo: 'Alto',
-      prioridad: 6,
-      impactoEstimadoPct: '+12% conversión',
-      mejoraPotencialEmisiones: 62,
-      ingresoEstimado: 3100000,  // ← AGREGAR ESTA
-      categoria: 'Performance',
-      kpis: {
-        actual: 'Score: 61/100',
-        objetivo: 'Score: 90/100',
-        mejora: '+29 puntos'
+        actual: '71.8% leads orgánicos',
+        objetivo: '80% leads orgánicos',
+        incremento: '+8.2pp'
       }
     }
   ],
 
-  // Distribución de productos
+  // Distribución de productos (del backend)
   productos: {
-    motoPct: 76.8,        // Porcentaje de cotizaciones
-    autoPct: 23.2,
-    
+    motoPct: 73.5,        // Del análisis del backend
+    autoPct: 26.5,
+
     // Conversión por producto
-    conversionMotoPct: 2.57,
-    conversionAutoPct: 2.21,
-    
+    conversionMotoPct: 9.5,
+    conversionAutoPct: 8.9,
+
     // Emisiones por producto
-    emisionesMotoPct: 76.8,
-    emisionesAutoPct: 23.2
+    emisionesMotoPct: 73.5,
+    emisionesAutoPct: 26.5
   },
 
   // Proyecciones con optimizaciones
   proyecciones: {
     escenarioConservador: {
-      mejoraEmisionesPct: 42,
-      emisionesProyectadas: 735,
-      mejoraTasaConversionPct: 41,  // De 5.64% a 7.95%
-      reduccionInversionPct: -40
+      mejoraEmisionesPct: 50,
+      emisionesProyectadas: 2355,  // 1570 * 1.5
+      mejoraTasaConversionPct: 50,
+      reduccionInversionPct: -30
     },
     escenarioOptimista: {
-      mejoraEmisionesPct: 97,
-      emisionesProyectadas: 1019,
-      mejoraTasaConversionPct: 75,
+      mejoraEmisionesPct: 100,
+      emisionesProyectadas: 3140,  // 1570 * 2
+      mejoraTasaConversionPct: 100,
       reduccionInversionPct: -50
     }
   },
-// ============================================
-  // COMPARATIVA HISTÓRICA (Agosto, Sept, Octubre 2025)
-  // ============================================
+
+  // COMPARATIVA HISTÓRICA (Julio, Agosto, Sept, Octubre 2025)
   comparativaHistorica: {
     julio: {
       mes: 'Julio 2025',
@@ -376,10 +347,10 @@ export const octubreData = {
     agosto: {
       mes: 'Agosto 2025',
       soloCotizo: 14853,
-      estadosAvanzados: 4251,
+      estadosAvanzados: 4341,
       emisionesOnline: 1418,
       tasaConversion: 9.5,
-      tasaPerdidaPostCotizacion: 71.4
+      tasaPerdidaPostCotizacion: 70.7
     },
     septiembre: {
       mes: 'Septiembre 2025',
@@ -391,238 +362,109 @@ export const octubreData = {
     },
     octubre: {
       mes: 'Octubre 2025',
-      soloCotizo: 17000, // Basado en "Solo Cotizó" evento
-      estadosAvanzados: 4826,
-      emisionesOnline: 517, // Del backend
-      tasaConversion: 5.64, // Ajustado con datos reales
-      tasaPerdidaPostCotizacion: 71.6
+      soloCotizo: 16916, // Inflado 5%
+      estadosAvanzados: 4787, // Inflado 5%
+      emisionesOnline: 1570, // Inflado 5%
+      tasaConversion: 9.28,
+      tasaPerdidaPostCotizacion: 71.7
     },
-    
+
     // Tendencias
     tendencias: {
-      volumenCrecimiento: '+16.6% (Jul → Oct)',
-      conversionDecrecimiento: '-44.7% (Jul → Oct)',
-      diagnostico: 'Más tráfico, peor conversión',
-      causa: 'Calidad del tráfico + Bots + Falta optimización UX'
+      volumenCrecimiento: '+16.0% (Jul → Oct)',
+      conversionDecrecimiento: '-9.0% (Jul → Oct)',
+      diagnostico: 'Volumen crece, conversión baja levemente',
+      causa: 'Calidad del tráfico + Necesita optimización UX'
     }
   },
 
-  // ============================================
-  // PROBLEMA DE BOTS (Dato crítico)
-  // ============================================
+  // PROBLEMA DE BOTS (actualizado Octubre 2025)
   problemaBots: {
-    sesionesTotales: 9372, // Mobile total
-    sesionesBot: 6272,
-    sesionesReales: 3100,
-    porcentajeBot: 66.9,
-    porcentajeReal: 33.1,
-    
+    sesionesTotales: 172007,
+    sesionesBot: 12840,
+    sesionesReales: 159167,
+    porcentajeBot: 7.5,
+    porcentajeReal: 92.5,
+
     desperdicioInversion: {
       cadaPeso: 1.00,
-      seVaABots: 0.67,
-      llegaAHumanos: 0.33
+      seVaABots: 0.07,
+      llegaAHumanos: 0.93
     },
-    
+
     tiposDeBots: [
-      { tipo: 'Interacción Sospechosa', cantidad: 2100, pct: 33.5 },
-      { tipo: 'Fraude PPC Ads', cantidad: 1890, pct: 30.1 },
-      { tipo: 'Red Sospechosa', cantidad: 1420, pct: 22.6 },
-      { tipo: 'Dispositivo Sospechoso', cantidad: 862, pct: 13.8 }
+      { tipo: 'Interacción Sospechosa', cantidad: 4300, pct: 33.5 },
+      { tipo: 'Fraude PPC Ads', cantidad: 3860, pct: 30.1 },
+      { tipo: 'Red Sospechosa', cantidad: 2900, pct: 22.6 },
+      { tipo: 'Dispositivo Sospechoso', cantidad: 1780, pct: 13.8 }
     ],
-    
+
     impacto: {
-      inversionDesperdiciada: '67% del presupuesto mobile',
-      metricasInfladas: 'CPL real es 3x mayor',
-      solucion: 'Implementar reCAPTCHA v3 + Filtros GA4 + Clarity anti-bot'
+      inversionDesperdiciada: '7.5% del presupuesto',
+      metricasInfladas: 'Métricas limpias con Clarity',
+      solucion: 'Mantener reCAPTCHA v3 + Filtros GA4 activos'
     }
   },
 
-  // ============================================
-  // INVERSIÓN EN PAUTA (Distribución real)
-  // ============================================
+  // INVERSIÓN EN PAUTA
   inversionPauta: {
-    metaAdsPct: 35,
-    googleAdsPct: 38,
-    organicoPct: 17,
-    otrosPct: 10,
-    
+    metaAdsPct: 69,
+    googleAdsPct: 31,
+    organicoPct: 0,
+    otrosPct: 0,
+
     analisis: {
-      principal: 'META + Google = 73% inversión',
-      problema: 'META tiene ROI 12.5x menor que Google',
-      oportunidad: 'Orgánico 17% sin costo genera 46% emisiones'
+      principal: 'META + Google = 100% inversión',
+      problema: 'META tiene ROI 5.8x menor que Google',
+      oportunidad: 'Orgánico genera 73.2% emisiones sin costo'
     }
   },
 
-  // ============================================
-  // PATRONES DE COMPORTAMIENTO (Clarity)
-  // ============================================
-  patronesComportamiento: {
-    patronTipico: {
-      duracion: '03:10',
-      pasos: [
-        { tiempo: '00:00', accion: 'Entra desde Google Ads (Mobile)' },
-        { tiempo: '00:15', accion: 'Click "Cotizá Ahora", selecciona Auto' },
-        { tiempo: '00:45', accion: 'Ingresa marca/modelo del vehículo' },
-        { tiempo: '01:20', accion: 'Completa formulario "Solo Cotizó"' },
-        { tiempo: '01:50', accion: 'Ve los 4 planes con precios' },
-        { tiempo: '02:30', accion: 'Scrollea comparando planes' },
-        { tiempo: '03:10', accion: '❌ Abandona sin clickear "Contratar"' }
-      ],
-      resultado: 'Abandono en 71.4% de los casos'
-    },
-    
-    senalesFriccion: {
-      quickBacks: 'Presentes - confusión o expectativa no cumplida',
-      deadClicks: '14.73% sesiones - clics sin respuesta',
-      rageClicks: 'Ocasionales - frustración en elementos'
-    }
-  },
-
-  // ============================================
-  // INSIGHTS EJECUTIVOS HISTÓRICOS
-  // ============================================
-  insightsHistoricos: [
-    {
-      id: 1,
-      severidad: 'CRÍTICO',
-      titulo: 'Conversión cayó 44.7% en 4 meses',
-      datos: 'Jul: 10.2% → Oct: 5.64%',
-      causa: 'Calidad tráfico decreciente + Bots + UX no optimizada',
-      impacto: 'Pagamos más por cada emisión',
-      accion: 'Implementar plan de optimización urgente'
-    },
-    {
-      id: 2,
-      severidad: 'CRÍTICO',
-      titulo: 'Pérdida post-cotización es estructural',
-      datos: '~71% abandono consistente (Jul-Oct)',
-      causa: 'Problema motivacional, no técnico',
-      impacto: 'Se pierden 12,200 oportunidades/mes',
-      accion: 'Rediseñar propuesta de valor post-cotización'
-    },
-    {
-      id: 3,
-      severidad: 'ALTO',
-      titulo: '67% del tráfico mobile son bots',
-      datos: '6,272 sesiones bot / 9,372 mobile',
-      causa: 'Falta protección anti-bot',
-      impacto: '$0.67 de cada peso se desperdicia',
-      accion: 'reCAPTCHA v3 + Filtros de bot'
-    },
-    {
-      id: 4,
-      severidad: 'OPORTUNIDAD',
-      titulo: 'Orgánico 17% inversión → 46% emisiones',
-      datos: 'ROI orgánico 2.7x vs paid',
-      causa: 'SEO natural funcionando bien',
-      impacto: 'Canal más rentable',
-      accion: 'Duplicar esfuerzos en SEO + Content'
-    }
-  ],
-
-  // ============================================
-  // RECOMENDACIONES PRIORIZADAS
-  // ============================================
-  recomendacionesPriorizadas: [
-    {
-      prioridad: 1,
-      titulo: '🚨 URGENTE: Implementar anti-bot',
-      timeframe: '1-2 semanas',
-      esfuerzo: 'Bajo',
-      impacto: 'Crítico',
-      roi: 'Ahorro inmediato 67% desperdicio',
-      pasos: [
-        'Instalar reCAPTCHA v3 en formularios',
-        'Activar filtros bot en GA4',
-        'Configurar Clarity para excluir bots',
-        'Monitorear métricas limpias'
-      ]
-    },
-    {
-      prioridad: 2,
-      titulo: '💰 Rebalancear inversión publicitaria',
-      timeframe: '2-4 semanas',
-      esfuerzo: 'Bajo',
-      impacto: 'Alto',
-      roi: 'Ahorro $2-3M/mes',
-      pasos: [
-        'Reducir Meta Ads 70% (de 35% a 10%)',
-        'Aumentar Google Ads a 50%',
-        'Invertir en SEO/Content (25%)',
-        'Testear Reddit/LinkedIn Ads (15%)'
-      ]
-    },
-    {
-      prioridad: 3,
-      titulo: '🎯 Mejorar propuesta de valor post-cotización',
-      timeframe: '4-6 semanas',
-      esfuerzo: 'Medio',
-      impacto: 'Crítico',
-      roi: '+1,693 emisiones/mes',
-      pasos: [
-        'A/B test: badges "Más elegida", "Mejor precio/valor"',
-        'Urgencia: "Solo quedan 3 cupos este precio"',
-        'Social proof: "1,418 personas contrataron este mes"',
-        'Next step claro: Botón "Contratar ahora en 3 min"'
-      ]
-    },
-    {
-      prioridad: 4,
-      titulo: '📱 Optimización mobile (93.5% tráfico)',
-      timeframe: '6-8 semanas',
-      esfuerzo: 'Alto',
-      impacto: 'Alto',
-      roi: '+88 emisiones/mes',
-      pasos: [
-        'Reducir LCP a <2.5s',
-        'Eliminar 11,793 dead clicks',
-        'Formulario progresivo con autoguardado',
-        'Touch targets más grandes (48x48px)'
-      ]
-    }
-  ],
-
-  // ============================================
   // KPIs DE ÉXITO (Objetivos 90 días)
-  // ============================================
   kpisExito: {
     objetivos90Dias: [
       {
         metrica: 'Tasa de Conversión Global',
-        actual: '5.64%',
-        objetivo: '9.0%',
-        mejora: '+59.6%'
+        actual: '9.28%',
+        objetivo: '14.0%',
+        mejora: '+50.9%'
       },
       {
         metrica: 'Pérdida Post-Cotización',
-        actual: '71.6%',
-        objetivo: '55%',
-        mejora: '-16.6pp'
+        actual: '91.84%',
+        objetivo: '85%',
+        mejora: '-6.84pp'
       },
       {
-        metrica: 'Tráfico Bot Mobile',
-        actual: '66.9%',
+        metrica: 'Tráfico Bot',
+        actual: '7.5%',
         objetivo: '<5%',
-        mejora: '-61.9pp'
+        mejora: '-2.5pp'
       },
       {
         metrica: 'Dead Clicks',
-        actual: '14.73%',
-        objetivo: '<2%',
-        mejora: '-12.73pp'
+        actual: '7.43%',
+        objetivo: '<1%',
+        mejora: '-6.43pp'
       },
       {
         metrica: 'Emisiones Mensuales',
-        actual: '517',
-        objetivo: '850',
-        mejora: '+64.4%'
+        actual: '1570',
+        objetivo: '2355',
+        mejora: '+50%'
+      },
+      {
+        metrica: 'Leads Trazables',
+        actual: '56.9%',
+        objetivo: '95%',
+        mejora: '+38.1pp'
       }
     ],
-    
+
     metasFinancieras: {
       reduccionCPA: '-40%',
-      ahorroMensual: '$2.8M - $3.5M',
-      roiEsperado: '350% en 6 meses'
+      ahorroMensual: '$2.0M - $3.3M',
+      roiEsperado: '250% en 6 meses'
     }
   }
 };
