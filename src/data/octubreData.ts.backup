@@ -165,7 +165,7 @@ export const octubreData = {
       paso: 6,
       nombre: 'Registró Pago',
       url: '/payment',
-      usuarios: 233, 
+      usuarios: 59,           // 57 * 1.05 ≈ 60
       porcentajeDelTotal: 0.35,
       conversionAlSiguiente: 0,
       abandonoPct: 0
@@ -300,23 +300,6 @@ export const octubreData = {
         actual: '71.8% leads orgánicos',
         objetivo: '80% leads orgánicos',
         incremento: '+8.2pp'
-      }
-    },
-    {
-      id: 6,
-      titulo: 'Leads de formularios a Call Center sin tracking',
-      descripcion: 'Algunos leads van a Excel del call center y no están siendo trazados',
-      impacto: 'Medio',
-      esfuerzo: 'Medio',
-      prioridad: 6,
-      impactoEstimadoPct: 'Recuperar visibilidad',
-      mejoraPotencialEmisiones: 50,  // ← AGREGAR ESTO
-      ingresoEstimado: 2500000,      // ← AGREGAR ESTO
-      categoria: 'Tracking',
-      kpis: {                        // ← AGREGAR ESTO
-        actual: 'Sin trazabilidad',
-        objetivo: '100% trazable',
-        incremento: 'N/A'
       }
     }
   ],

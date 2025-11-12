@@ -7,7 +7,7 @@ import octubreData from '../data/octubreData';
 const COLORS = ['#8b5cf6', '#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#ec4899', '#6366f1', '#14b8a6'];
 
 export default function FunnelChart() {
-  const { funnelCompleto } = octubreData;
+  const { funnelCompleto, resumen } = octubreData;
 
   const formatNumber = (value: number) => {
     return new Intl.NumberFormat('es-AR').format(value);
@@ -17,28 +17,28 @@ export default function FunnelChart() {
     <div className="space-y-8">
       {/* Header con KPIs */}
       <div className="bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl p-8 text-white">
-        <h2 className="text-3xl font-bold mb-3">🔍 Embudo de Conversión Completo</h2>
+        <h2 className="text-3xl font-bold mb-3">🔍 Embudo de Conversión Backend</h2>
         <p className="text-purple-100 text-lg mb-6">
-          Análisis del journey completo desde landing hasta pago - Octubre 2025
+          Análisis del journey completo - Octubre 2025
         </p>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div className="bg-white bg-opacity-20 rounded-xl p-4">
-            <p className="text-purple-100 text-sm">Visitantes Únicos</p>
-            <p className="text-3xl font-bold">{formatNumber(86556)}</p>
+            <p className="text-purple-100 text-sm">Solo Cotizó</p>
+            <p className="text-3xl font-bold">{formatNumber(funnelCompleto[0].usuarios)}</p>
           </div>
           <div className="bg-white bg-opacity-20 rounded-xl p-4">
             <p className="text-purple-100 text-sm">Emisiones</p>
-            <p className="text-3xl font-bold">{formatNumber(517)}</p>
+            <p className="text-3xl font-bold">{formatNumber(resumen.emisionesTotalesBackend)}</p>
           </div>
           <div className="bg-white bg-opacity-20 rounded-xl p-4">
             <p className="text-purple-100 text-sm">Conversión Global</p>
-            <p className="text-3xl font-bold">0.60%</p>
+            <p className="text-3xl font-bold">{((resumen.emisionesTotalesBackend / funnelCompleto[0].usuarios) * 100).toFixed(2)}%</p>
           </div>
           <div className="bg-white bg-opacity-20 rounded-xl p-4">
             <p className="text-purple-100 text-sm">Mayor Abandono</p>
-            <p className="text-3xl font-bold">75.9%</p>
-            <p className="text-purple-100 text-xs">Paso 1</p>
+            <p className="text-3xl font-bold">{funnelCompleto[0].abandonoPct.toFixed(1)}%</p>
+            <p className="text-purple-100 text-xs">Solo Cotizó → Eligió</p>
           </div>
         </div>
       </div>
@@ -50,16 +50,17 @@ export default function FunnelChart() {
           <BarChart
             data={funnelCompleto}
             layout="vertical"
-            margin={{ top: 5, right: 30, left: 120, bottom: 5 }}
+            margin={{ top: 20, right: 30, left: 150, bottom: 20 }}
           >
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis type="number" />
-            <YAxis dataKey="nombre" type="category" width={150} />
+            <YAxis dataKey="nombre" type="category" width={140} />
             <Tooltip
               formatter={(value: number) => formatNumber(value)}
-              contentStyle={{ backgroundColor: '#fff', border: '1px solid #e5e7eb', borderRadius: '8px' }}
+              contentStyle={{ backgroundColor: '#fff', border: '1px solid #ccc', borderRadius: '8px' }}
             />
-            <Bar dataKey="usuarios" radius={[0, 8, 8, 0]}>
+            <Legend />
+            <Bar dataKey="usuarios" name="Usuarios" radius={[0, 10, 10, 0]}>
               {funnelCompleto.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
               ))}
@@ -68,136 +69,80 @@ export default function FunnelChart() {
         </ResponsiveContainer>
       </div>
 
-      {/* Detalle paso a paso */}
-      <div className="bg-white rounded-2xl p-8 shadow-lg">
-        <h3 className="text-xl font-bold text-gray-900 mb-6">Análisis Detallado por Paso</h3>
-        <div className="space-y-4">
-          {funnelCompleto.map((step, index) => {
-            const isHighAbandonment = step.abandonoPct > 50;
-            const isMediumAbandonment = step.abandonoPct > 35 && step.abandonoPct <= 50;
-            
-            return (
-              <motion.div
-                key={step.paso}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className={`border-l-4 pl-6 pr-6 py-4 rounded-r-xl ${
-                  isHighAbandonment 
-                    ? 'bg-red-50 border-red-500'
-                    : isMediumAbandonment
-                    ? 'bg-orange-50 border-orange-500'
-                    : 'bg-green-50 border-green-500'
-                }`}
-              >
-                <div className="flex items-start justify-between">
-                  <div className="flex-1">
-                    <div className="flex items-center space-x-3 mb-2">
-                      <span className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-white text-sm ${
-                        isHighAbandonment ? 'bg-red-500' : isMediumAbandonment ? 'bg-orange-500' : 'bg-green-500'
-                      }`}>
-                        {step.paso}
-                      </span>
-                      <h4 className="font-bold text-gray-900 text-lg">{step.nombre}</h4>
-                      {isHighAbandonment && <AlertTriangle className="w-5 h-5 text-red-600" />}
-                      {!isHighAbandonment && !isMediumAbandonment && <CheckCircle className="w-5 h-5 text-green-600" />}
-                    </div>
-                    
-                    <div className="mb-3">
-                      <code className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded font-mono">
-                        {step.url}
-                      </code>
-                    </div>
-
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-3">
-                      <div>
-                        <p className="text-xs text-gray-500">Usuarios</p>
-                        <p className="text-xl font-bold text-gray-900">{formatNumber(step.usuarios)}</p>
-                      </div>
-                      <div>
-                        <p className="text-xs text-gray-500">% del Total</p>
-                        <p className="text-xl font-bold text-purple-600">{step.porcentajeDelTotal}%</p>
-                      </div>
-                      {index < funnelCompleto.length - 1 && (
-                        <>
-                          <div>
-                            <p className="text-xs text-gray-500">Siguiente Paso</p>
-                            <p className="text-xl font-bold text-green-600">{step.conversionAlSiguiente}%</p>
-                          </div>
-                          <div>
-                            <p className="text-xs text-gray-500">Abandono</p>
-                            <p className={`text-xl font-bold ${
-                              isHighAbandonment ? 'text-red-600' : isMediumAbandonment ? 'text-orange-600' : 'text-green-600'
-                            }`}>
-                              {step.abandonoPct}%
-                            </p>
-                          </div>
-                        </>
-                      )}
-                    </div>
-
-                    {/* Insights por paso */}
-                    {step.paso === 1 && (
-                      <div className="mt-3 p-3 bg-white rounded-lg border-2 border-red-200">
-                        <p className="text-sm font-semibold text-red-700 mb-1">⚠️ OPORTUNIDAD CRÍTICA #1</p>
-                        <p className="text-sm text-gray-700">
-                          El 75.9% abandona aquí. Simplificar el formulario inicial puede generar +13,500 cotizaciones/mes adicionales.
-                        </p>
-                      </div>
-                    )}
-
-                    {step.paso === 3 && (
-                      <div className="mt-3 p-3 bg-white rounded-lg border-2 border-orange-200">
-                        <p className="text-sm font-semibold text-orange-700 mb-1">💡 Insight</p>
-                        <p className="text-sm text-gray-700">
-                          47.4% abandona al ver los planes. Posible causa: precio percibido vs valor no claro.
-                        </p>
-                      </div>
-                    )}
-
-                    {step.paso === 8 && (
-                      <div className="mt-3 p-3 bg-white rounded-lg border-2 border-green-200">
-                        <p className="text-sm font-semibold text-green-700 mb-1">✅ Buen desempeño</p>
-                        <p className="text-sm text-gray-700">
-                          Los que llegan aquí tienen alta intención. El 61.2% del paso anterior completa el pago.
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
+      {/* Tabla detallada */}
+      <div className="bg-white rounded-2xl p-8 shadow-lg overflow-x-auto">
+        <h3 className="text-xl font-bold text-gray-900 mb-6">Detalle por Etapa</h3>
+        <table className="w-full">
+          <thead>
+            <tr className="border-b-2 border-gray-200">
+              <th className="text-left p-3 font-semibold text-gray-700">Paso</th>
+              <th className="text-left p-3 font-semibold text-gray-700">Etapa</th>
+              <th className="text-right p-3 font-semibold text-gray-700">Usuarios</th>
+              <th className="text-right p-3 font-semibold text-gray-700">% del Total</th>
+              <th className="text-right p-3 font-semibold text-gray-700">Abandono</th>
+            </tr>
+          </thead>
+          <tbody>
+            {funnelCompleto.map((etapa, index) => (
+              <tr key={etapa.paso} className="border-b border-gray-100 hover:bg-gray-50">
+                <td className="p-3">
+                  <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-purple-600 text-white font-bold text-sm">
+                    {etapa.paso}
+                  </span>
+                </td>
+                <td className="p-3 font-medium text-gray-900">{etapa.nombre}</td>
+                <td className="p-3 text-right font-bold text-gray-900">{formatNumber(etapa.usuarios)}</td>
+                <td className="p-3 text-right">
+                  <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold">
+                    {etapa.porcentajeDelTotal.toFixed(2)}%
+                  </span>
+                </td>
+                <td className="p-3 text-right">
+                  {etapa.abandonoPct > 0 && (
+                    <span className={`px-3 py-1 rounded-full text-sm font-semibold ${
+                      etapa.abandonoPct > 80 ? 'bg-red-100 text-red-700' :
+                      etapa.abandonoPct > 50 ? 'bg-orange-100 text-orange-700' :
+                      'bg-yellow-100 text-yellow-700'
+                    }`}>
+                      {etapa.abandonoPct.toFixed(1)}%
+                    </span>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
 
-      {/* Resumen ejecutivo */}
-      <div className="bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl p-8 border-2 border-orange-200">
-        <h3 className="text-2xl font-bold text-gray-900 mb-4">📋 Resumen Ejecutivo</h3>
-        <div className="space-y-3">
-          <div className="flex items-start space-x-3">
-            <TrendingDown className="w-6 h-6 text-red-600 flex-shrink-0 mt-1" />
+      {/* Alertas críticas */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="bg-red-50 border-2 border-red-200 rounded-xl p-6">
+          <div className="flex items-start mb-3">
+            <AlertTriangle className="w-6 h-6 text-red-600 mt-1 mr-3" />
             <div>
-              <p className="font-semibold text-gray-900">Mayor pérdida: Landing → Datos Vehículo</p>
-              <p className="text-gray-700">De 86,556 visitantes, solo 20,898 (24.1%) completan el primer formulario.</p>
+              <h4 className="font-bold text-red-900 text-lg">🚨 Abandono Crítico</h4>
+              <p className="text-red-700 mt-2">
+                <strong>{funnelCompleto[0].abandonoPct.toFixed(1)}%</strong> abandona después de "Solo Cotizó"
+              </p>
+              <p className="text-red-600 text-sm mt-2">
+                Esto representa <strong>{(funnelCompleto[0].usuarios * (funnelCompleto[0].abandonoPct / 100)).toFixed(0)}</strong> leads perdidos
+              </p>
             </div>
           </div>
-          
-          <div className="flex items-start space-x-3">
-            <CheckCircle className="w-6 h-6 text-green-600 flex-shrink-0 mt-1" />
+        </div>
+
+        <div className="bg-green-50 border-2 border-green-200 rounded-xl p-6">
+          <div className="flex items-start mb-3">
+            <CheckCircle className="w-6 h-6 text-green-600 mt-1 mr-3" />
             <div>
-              <p className="font-semibold text-gray-900">Mejor conversión: Datos Vehículo Final → Pago</p>
-              <p className="text-gray-700">61.2% completa el pago una vez que llega al último paso.</p>
+              <h4 className="font-bold text-green-900 text-lg">✅ Oportunidad</h4>
+              <p className="text-green-700 mt-2">
+                Reducir abandono un <strong>30%</strong> generaría
+              </p>
+              <p className="text-green-600 text-sm mt-2 font-bold">
+                +{((funnelCompleto[0].usuarios * 0.3 * (resumen.emisionesTotalesBackend / funnelCompleto[0].usuarios))).toFixed(0)} emisiones adicionales/mes
+              </p>
             </div>
-          </div>
-          
-          <div className="mt-6 p-4 bg-white rounded-lg">
-            <p className="text-sm font-semibold text-gray-900 mb-2">💰 Impacto Potencial:</p>
-            <ul className="text-sm text-gray-700 space-y-1">
-              <li>• Reducir abandono paso 1 al 60% = <strong className="text-green-600">+13,529 cotizaciones/mes</strong></li>
-              <li>• Optimizar paso 3 (Ver Planes) = <strong className="text-green-600">+1,693 cotizaciones/mes</strong></li>
-              <li>• Total combinado potencial = <strong className="text-green-600">+155 emisiones adicionales/mes</strong></li>
-            </ul>
           </div>
         </div>
       </div>
